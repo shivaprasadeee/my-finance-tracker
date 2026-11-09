@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#101a2b"><meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"><meta name="apple-mobile-web-app-title" content="My Finance">
+<link rel="manifest" href="manifest.webmanifest"><link rel="stylesheet" href="styles.css">
+<title>My Finance Tracker</title>
+</head>
+<body>
+<header><div><small>PRIVATE FINANCE • LOCAL ONLY</small><h1>My Finance</h1></div><span class="status">● On this iPhone</span></header>
+<main>
+<section id="lock" class="panel lock">
+  <div class="lock-icon">🔐</div><h2 id="lock-title">Set your 6-digit PIN</h2>
+  <p id="lock-help">Your records will be encrypted on this device. If you forget this PIN, the data cannot be recovered.</p>
+  <form id="pin-form"><input id="pin" type="password" inputmode="numeric" pattern="[0-9]{6}" maxlength="6" placeholder="••••••" autocomplete="off" required><button class="primary" id="pin-button">Set PIN</button></form>
+  <p class="error" id="pin-error" aria-live="polite"></p>
+  <p class="tiny">This browser app uses PIN-derived encryption. A six-digit PIN is weaker than a long passphrase; use a unique PIN and keep your iPhone protected by its device passcode.</p>
+</section>
+<div id="app" hidden>
+<section class="hero"><small>MONTHLY CASH FLOW</small><div class="total" id="net">₹0</div><div class="sub">Income minus expenses this month</div><div class="summary"><div>Income<strong id="income">₹0</strong></div><div>Expenses<strong id="expense">₹0</strong></div></div></section>
+<nav><button class="tab active" data-tab="transactions">Transactions</button><button class="tab" data-tab="loans">Loans</button><button class="tab" data-tab="investments">Investments</button></nav>
+<section id="transactions" class="pane">
+ <div class="heading"><h2>Add transaction</h2></div>
+ <form id="tx-form" class="panel">
+  <div class="switch"><label><input type="radio" name="type" value="expense" checked> Expense</label><label><input type="radio" name="type" value="income"> Income</label></div>
+  <label>Amount (₹)<input id="tx-amount" type="number" min="0.01" step="0.01" required placeholder="e.g. 850"></label>
+  <div class="grid"><label>Category<select id="tx-category"><option>Food</option><option>Household</option><option>Transport</option><option>Shopping</option><option>Medical</option><option>Bills</option><option>EMI</option><option>Insurance</option><option>Salary</option><option>Other</option></select></label><label>Date<input id="tx-date" type="date" required></label></div>
+  <label>Note (optional)<input id="tx-note" maxlength="80" placeholder="Description"></label><button class="primary">Save transaction</button>
+ </form><div class="heading"><h2>Recent transactions</h2></div><div class="panel list" id="tx-list"></div>
+</section>
+<section id="loans" class="pane" hidden>
+ <div class="heading"><h2>Add loan</h2></div>
+ <form id="loan-form" class="panel">
+  <label>Loan name<input id="loan-name" required placeholder="e.g. Personal loan"></label>
+  <div class="grid"><label>Outstanding (₹)<input id="loan-balance" type="number" min="0" step=".01" required></label><label>Annual interest (%)<input id="loan-rate" type="number" min="0" step=".01" value="9.9"></label></div>
+  <div class="grid"><label>Monthly EMI (₹)<input id="loan-emi" type="number" min="0" step=".01"></label><label>EMIs remaining<input id="loan-count" type="number" min="0" step="1"></label></div>
+  <button class="primary">Save loan</button>
+ </form><div class="heading"><h2>Loans</h2></div><div class="panel list" id="loan-list"></div>
+</section>
+<section id="investments" class="pane" hidden>
+ <div class="heading"><h2>Add investment</h2></div>
+ <form id="inv-form" class="panel">
+  <label>Investment name<input id="inv-name" required placeholder="e.g. UTI Nifty 50 Index"></label>
+  <div class="grid"><label>Invested amount (₹)<input id="inv-cost" type="number" min="0" step=".01" required></label><label>Current value (₹)<input id="inv-value" type="number" min="0" step=".01" required></label></div>
+  <label>Type<select id="inv-type"><option>Mutual fund</option><option>Stock</option><option>ETF</option><option>EPF</option><option>Gold</option><option>Other</option></select></label>
+  <button class="primary">Save investment</button>
+ </form><div class="heading"><h2>Investments</h2></div><div class="panel list" id="inv-list"></div>
+</section>
+<section class="panel privacy">
+ <h2>Privacy & data</h2><p>Financial records are encrypted before being saved in this iPhone browser's local storage. The app contains no analytics, ads, bank connections or cloud database.</p>
+ <button class="secondary" id="lock-now">Lock app now</button><button class="danger" id="erase">Erase all encrypted data</button>
+ <p class="tiny">No backup is configured. Forgetting your PIN or clearing Safari website data may permanently destroy your records. This PWA cannot use Face ID or the iOS Keychain directly.</p>
+</section>
+</div>
+</main><footer>My Finance Tracker · Privacy-first MVP</footer>
+<script src="app.js"></script>
+</body></html>
